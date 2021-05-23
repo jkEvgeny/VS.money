@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create policyholder</title>
+</head>
+<body>
+<form
+        action="#" th:action="@{/policyholder-create}" th:object="${policyholder}" method="post">
+
+    <p>
+    <label for="surname">ФИО</label>
+    <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия">
+    <label for="name"></label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Имя">
+    <label for="patronymic"></label>
+    <input type="text" th:field="*{patronymic}" id="patronymic" placeholder="Отчество">
+    </p>
+    <p>
+    <label for="birth_date">Дата рождения</label>
+    <input type="date" th:field="*{birth_date}" id="birth_date" placeholder="Дата рожения">
+    </p>
+    <p>
+    <label for="patronymic">Паспорт серия</label>
+    <input type="text" th:field="*{passport_series}" id="passport_series" placeholder="Серия паспорта">
+    <label for="patronymic">№</label>
+    <input type="text" th:field="*{passport_number}" id="passport_number" placeholder="Номер паспорта">
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+</body>
+</html>
