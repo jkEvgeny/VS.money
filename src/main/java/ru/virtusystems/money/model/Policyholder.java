@@ -38,4 +38,12 @@ public class Policyholder {
 
     @Column(name = "passport_number")
     private Integer passport_number;
+
+    @OneToOne
+    private Address address;
+    @OneToOne
+    @JoinColumn(name = "execution_id")
+    private Contract contract;
+    @OneToOne
+    private Calculation calculation;
 }

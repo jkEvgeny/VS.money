@@ -8,11 +8,9 @@
 <form
         action="#" th:action="@{/policyholder-update/{id}(id=${policyholder.id})}" th:object="${policyholder}" method="post">
     <p>
-        <label for="surname">ФИО</label>
+        <label>ФИО</label>
         <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия">
-        <label for="name"></label>
         <input type="text" th:field="*{name}" id="name" placeholder="Имя">
-        <label for="patronymic"></label>
         <input type="text" th:field="*{patronymic}" id="patronymic" placeholder="Отчество">
     </p>
     <p>

@@ -29,4 +29,9 @@ public class PolicyholderDto {
 
     private String user;
 
+    private ContractDto contract;
+
+    private AddressDto address;
+
+    private CalculationDto calculation;
 }

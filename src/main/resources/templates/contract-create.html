@@ -6,28 +6,28 @@
 </head>
 <body>
 <form
-        action="#" th:action="@{/calculation}" th:object="${calculation}" method="post">
+        action="#" th:action="@{/contract-create}" th:object="${contracts}" method="post">
 
     <p>
-        <label for="insurance_amount">Страховая сумма</label>
-        <input type="text" th:field="*{insurance_amount}" id="insurance_amount" placeholder="Страховая сумма">
-        <label for="validity_period_from">Срок действия с</label>
-        <input type="date" th:field="*{validity_period_from}" id="validity_period_from">
-        <label for="validity_period_to">По</label>
-        <input type="date" th:field="*{validity_period_to}" id="validity_period_to">
+        <label for="insuranceAmount">Страховая сумма</label>
+        <input type="text" th:field="${*.calculation.insuranceAmount}" id="insuranceAmount" placeholder="Страховая сумма">
+       <!-- <label for="validityPeriodFrom">Срок действия с</label>
+        <input type="date" th:field="${*.calculation.validityPeriodFrom}" id="validityPeriodFrom">
+        <label for="validityPeriodTo">По</label>
+        <input type="date" th:field="${*.calculation.validityPeriodTo}" id="validityPeriodTo">-->
     </p>
-    <p>
+<!--    <p>-->
         <!--        <label for="propertyType">Тип недвижимости</label>-->
         <!--        <input type="text" th:field="*{propertyType}" id="propertyType" placeholder="Отчество">-->
-    <div class="dropdown">
-        <div class="title">Тип недвижимости</div>
-        <ul>
-            <li>Квартира</li>
-            <li>Дом</li>
-            <li>Комната</li>
-        </ul>
-    </div>
-    </p>
+<!--    <div class="dropdown">-->
+<!--        <div class="title">Тип недвижимости</div>-->
+<!--        <ul>-->
+<!--            <li>Квартира</li>-->
+<!--            <li>Дом</li>-->
+<!--            <li>Комната</li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--    </p>
     <p>
         <label for="year_of_construction">Год постройки</label>
         <input type="text" th:field="*{year_of_construction}" id="year_of_construction" placeholder="Дата рожения">
@@ -40,8 +40,8 @@
     <form action="/policyholders">
         <input type="button" value="Рассчитать">
     </form>
-    </p>
-    <p>
+    </p>-->
+    <!--<p>
         <label for="settlement_date">Дата расчёта</label>
         <input type="date" th:field="{calculation.settlement_date}" id="settlement_date" placeholder="Дата расчёта">
 
@@ -81,7 +81,7 @@
         <label for="passport_number">№</label>
         <input type="text" th:field="*{passport_number}" id="passport_number" placeholder="Номер паспорта">
     </p>
-</form>
+--></form>
 
 </body>
 </html>

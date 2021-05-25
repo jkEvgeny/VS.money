@@ -57,3 +57,6 @@ CREATE TABLE address
     flat                 VARCHAR NOT NULL,
     comment              VARCHAR
 );
+
+INSERT INTO address (id, state, index)
+values (100000, 000001, '24.05.2021');

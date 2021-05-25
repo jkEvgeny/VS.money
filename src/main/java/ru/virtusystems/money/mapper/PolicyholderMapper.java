@@ -1,5 +1,6 @@
 package ru.virtusystems.money.mapper;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.virtusystems.money.dto.PolicyholderDto;
 import ru.virtusystems.money.model.Policyholder;
@@ -7,7 +8,12 @@ import ru.virtusystems.money.model.Policyholder;
 import java.time.LocalDate;
 
 @Component
+@RequiredArgsConstructor
 public class PolicyholderMapper {
+
+    private final AddressMapper addressMapper;
+    private final ContractMapper contractMapper;
+    private  final CalculationMapper calculationMapper;
 
     public PolicyholderDto mapToDto(Policyholder model) {
         if (model == null) return null;
@@ -21,6 +27,9 @@ public class PolicyholderMapper {
                 .surname(model.getSurname())
                 .passport(model.getPassport_number() + " " + model.getPassport_series())
                 .user(model.getSurname() + " " + model.getName() + " " + model.getPatronymic())
+                .address(addressMapper.mapToDto(model.getAddress()))
+                .calculation(calculationMapper.mapToDto(model.getCalculation()))
+                .contract(contractMapper.mapToDto(model.getContract()))
                 .build();
     }
 
@@ -34,6 +43,9 @@ public class PolicyholderMapper {
                 .passport_series(dto.getPassport_series() == null ? null : Integer.parseInt(dto.getPassport_series()))
                 .patronymic(dto.getPatronymic())
                 .surname(dto.getSurname())
+                .address(addressMapper.mapToModel(dto.getAddress()))
+                .calculation(calculationMapper.mapToModel(dto.getCalculation()))
+                .contract(contractMapper.mapToModel(dto.getContract()))
                 .build();
     }
 }

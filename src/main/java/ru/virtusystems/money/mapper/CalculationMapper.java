@@ -27,7 +27,7 @@ public class CalculationMapper {
                 .build();
     }
 
-    public Calculation mapToModel(CalculationDto dto, Integer id) {
+    public Calculation mapToModel(CalculationDto dto) {
         if (dto == null) return null;
         return Calculation.builder()
                 .id(dto.getId())

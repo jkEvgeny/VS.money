@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "execution")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Contract {
     @Id
     @Column(name = "id")
