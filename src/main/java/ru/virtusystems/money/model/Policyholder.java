@@ -1,16 +1,19 @@
 package ru.virtusystems.money.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.boot.context.properties.bind.Name;
-import org.springframework.cache.annotation.Cacheable;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Entity
 @Table(name = "policyholder")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Policyholder {
 
     @Id
@@ -35,8 +38,4 @@ public class Policyholder {
 
     @Column(name = "passport_number")
     private Integer passport_number;
-
-    @Column(name = "change")
-    private Boolean change;
-
 }

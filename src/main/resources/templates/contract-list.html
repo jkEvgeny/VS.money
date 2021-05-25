@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="UTF-8">
+    <title>Contracts</title>
+</head>
+<body>
+<div th:switch="${contracts}">
+    <h2 th:case="null">No contracts found!</h2>
+    <p>
+    <form action="/contract-create">
+        <button type="submit">Создать договор</button>
+    </form>
+    </p>
+    <div th:case="*">
+        <table>
+            <thead>
+            <tr>
+                <th>Серия - Номер</th>
+                <th>Дата заключения</th>
+                <th>Страхователь</th>
+                <th>Премия</th>
+                <th>Срок действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="contract : ${contracts}">
+                <td th:text="${contract.contractNumber}"></td>
+<!--                <td th:text="${calculation.validityPeriodFrom}"></td>-->
+<!--                <td th:text="${policyholder.user}"></td>-->
+<!--                <td th:text="${calculation.prize}"></td>-->
+                <td th:text="${contract.dateOfConclusion}"></td>
+                <td><a th:href="@{contract-open/{id}(id=${contract.id})}">Открыть договор</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

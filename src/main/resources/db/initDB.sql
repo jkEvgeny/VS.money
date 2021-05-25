@@ -12,11 +12,11 @@ CREATE TABLE policyholder
     passport_series INTEGER                           NOT NULL,
     passport_number INTEGER                           NOT NULL
 );
-INSERT INTO policyholder(id, name, surname, patronymic, birth_date, passport_series, passport_number, change)
-values (100000, 'John', 'Smith', 'Paul', '10.01.1970', 1234, 123456, true);
+INSERT INTO policyholder(id, name, surname, patronymic, birth_date, passport_series, passport_number)
+values (100000, 'John', 'Smith', 'Paul', '10.01.1970', 1234, 123456);
 
-INSERT INTO policyholder(id, name, surname, patronymic, birth_date, passport_series, passport_number, change)
-values (100001, 'Sarah', 'Dillan', '', '30.12.1990', 4321, 654321, true);
+INSERT INTO policyholder(id, name, surname, patronymic, birth_date, passport_series, passport_number)
+values (100001, 'Sarah', 'Dillan', '', '30.12.1990', 4321, 654321);
 
 CREATE TABLE calculation
 (
@@ -30,6 +30,8 @@ CREATE TABLE calculation
     settlement_date      TIMESTAMP           DEFAULT now() NOT NULL,
     prize                VARCHAR                           NOT NULL
 );
+INSERT INTO calculation (id, insurance_amount, validity_period_from, validity_period_to, property_type, year_of_construction, area,settlement_date,prize)
+values (100001, 431, '24.05.2021', '24.05.2022','Квартира', '2019', '75', '24.05.2021', 32000);
 
 CREATE TABLE execution
 (
@@ -37,6 +39,8 @@ CREATE TABLE execution
     contract_number    INTEGER                           NOT NULL,
     date_of_conclusion TIMESTAMP           DEFAULT now() NOT NULL
 );
+INSERT INTO execution (id, contract_number, date_of_conclusion)
+values (100000, 000001, '24.05.2021');
 
 CREATE TABLE address
 (

@@ -18,7 +18,7 @@ public class ContractController {
         this.contractService = contractService;
     }
 
-/*    @GetMapping("/contracts")
+    @GetMapping("/contracts")
     public String findAll(Model model) {
         List<Contract> contractList = contractService.findAll();
         model.addAttribute("contracts", contractList);
@@ -34,5 +34,5 @@ public class ContractController {
     public String createConract(Contract contract){
         contractService.saveContract(contract);
         return "redirect:/contracts";
-    }*/
+    }
 }

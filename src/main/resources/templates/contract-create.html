@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Оформление договора - Имущество</title>
+</head>
+<body>
+<form
+        action="#" th:action="@{/calculation}" th:object="${calculation}" method="post">
+
+    <p>
+        <label for="insurance_amount">Страховая сумма</label>
+        <input type="text" th:field="*{insurance_amount}" id="insurance_amount" placeholder="Страховая сумма">
+        <label for="validity_period_from">Срок действия с</label>
+        <input type="date" th:field="*{validity_period_from}" id="validity_period_from">
+        <label for="validity_period_to">По</label>
+        <input type="date" th:field="*{validity_period_to}" id="validity_period_to">
+    </p>
+    <p>
+        <!--        <label for="propertyType">Тип недвижимости</label>-->
+        <!--        <input type="text" th:field="*{propertyType}" id="propertyType" placeholder="Отчество">-->
+    <div class="dropdown">
+        <div class="title">Тип недвижимости</div>
+        <ul>
+            <li>Квартира</li>
+            <li>Дом</li>
+            <li>Комната</li>
+        </ul>
+    </div>
+    </p>
+    <p>
+        <label for="year_of_construction">Год постройки</label>
+        <input type="text" th:field="*{year_of_construction}" id="year_of_construction" placeholder="Дата рожения">
+    </p>
+    <p>
+        <label for="area">Площадь</label>
+        <input type="text" th:field="*{area}" id="area" placeholder="Площадь">
+    </p>
+    <p>
+    <form action="/policyholders">
+        <input type="button" value="Рассчитать">
+    </form>
+    </p>
+    <p>
+        <label for="settlement_date">Дата расчёта</label>
+        <input type="date" th:field="{calculation.settlement_date}" id="settlement_date" placeholder="Дата расчёта">
+
+        <label for="prize">Премия</label>
+        <input type="text" th:field="*{prize}" id="prize" placeholder="Премия"> // рассчитать по формуле
+    </p>
+    <p>
+        <label for="contract_number">№ договора</label>
+        <input type="text" th:field="{execution.contract_number}" id="contract_number" placeholder="№ договора">
+
+        <label for="date_of_conclusion">Дата заключения</label>
+        <input type="date" th:field="*{execution.date_of_conclusion}" id="date_of_conclusion" placeholder="Премия"> // рассчитать по формуле
+    </p>
+</form>
+<H2>Страхователь</H2>
+<form
+        action="#" th:action="@{/policyholder-update/{id}(id=${policyholder.id})}" th:object="${policyholder}" method="post">
+    <form action="/policyholders">
+        <button type="submit">Выбрать</button>
+    </form>
+    <p>
+        <label for="surname">ФИО</label>
+        <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия">
+        <label for="name"></label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Имя">
+        <label for="patronymic"></label>
+        <input type="text" th:field="*{patronymic}" id="patronymic" placeholder="Отчество">
+    <td><a th:href="@{policyholder-update/{id}(id=${policyholder.id})}">Изменить</a></td>
+    </p>
+    <p>
+        <label for="birth_date">Дата рождения</label>
+        <input type="date" th:field="*{birth_date}" id="birth_date" placeholder="Дата рожения">
+    </p>
+    <p>
+        <label for="passport_series">Паспорт серия</label>
+        <input type="text" th:field="*{passport_series}" id="passport_series" placeholder="Серия паспорта">
+        <label for="passport_number">№</label>
+        <input type="text" th:field="*{passport_number}" id="passport_number" placeholder="Номер паспорта">
+    </p>
+</form>
+
+</body>
+</html>
