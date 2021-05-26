@@ -7,7 +7,16 @@ import ru.virtusystems.money.dto.CalculationDto;
 import ru.virtusystems.money.mapper.CalculationMapper;
 import ru.virtusystems.money.model.Calculation;
 import ru.virtusystems.money.repository.CalculationRepository;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Optional;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class CalculationService {
@@ -20,12 +29,49 @@ public class CalculationService {
         this.calculationRepository = calculationRepository;
     }
 
-    public Calculation findById(Integer id) {
-        return calculationRepository.findById(id).orElse(null);
-    }
-
     @Transactional
-    public void saveCalculation(CalculationDto calculationDto) {
+    public CalculationDto saveCalculationAndUpdatePrizeAndSettlementDate(final CalculationDto calculationDto) {
+        double propertyTypeRatio = 0;
+        double yearOfConstructionRatio = 0;
+        double areaRatio = 0;
+        long daysBetween = DAYS.between(calculationDto.getValidityPeriodFrom(), calculationDto.getValidityPeriodTo());
+        double prize;
+        LocalDateTime settlementDate = LocalDateTime.now();
+
+        switch (calculationDto.getPropertyType().toLowerCase(Locale.ROOT)) {
+            case "квартира":
+                propertyTypeRatio = 1.7;
+                break;
+            case "дом":
+                propertyTypeRatio = 1.5;
+                break;
+            case "комната":
+                propertyTypeRatio = 1.3;
+                break;
+        }
+
+        if (Integer.parseInt(calculationDto.getYearOfConstruction()) < 2000) {
+            yearOfConstructionRatio = 1.3;
+        } else if (Integer.parseInt(calculationDto.getYearOfConstruction()) >= 2000 &&
+                Integer.parseInt(calculationDto.getYearOfConstruction()) <= 2014) {
+            yearOfConstructionRatio = 1.6;
+        } else if (Integer.parseInt(calculationDto.getYearOfConstruction()) > 2014) {
+            yearOfConstructionRatio = 2;
+        }
+
+        if (Integer.parseInt(calculationDto.getArea()) < 50) {
+            areaRatio = 1.2;
+        } else if (Integer.parseInt(calculationDto.getArea()) >= 50 &&
+                Integer.parseInt(calculationDto.getArea()) <= 100) {
+            areaRatio = 1.5;
+        } else if (Integer.parseInt(calculationDto.getArea()) > 100) {
+            areaRatio = 2;
+        }
+
+        prize = (calculationDto.getInsuranceAmount() / daysBetween) * propertyTypeRatio * yearOfConstructionRatio * areaRatio;
+
+        BigDecimal result = new BigDecimal(prize);
+        result = result.setScale(2, RoundingMode.DOWN);
 
         if (calculationDto.getId() == null) {
             calculationRepository.save(mapper.mapToModel(calculationDto));
@@ -37,8 +83,10 @@ public class CalculationService {
             calculation.get().setPropertyType(calculationDto.getPropertyType());
             calculation.get().setYearOfConstruction(calculationDto.getYearOfConstruction());
             calculation.get().setArea(calculationDto.getArea());
-            calculation.get().setSettlementDate(calculationDto.getSettlementDate());
-            calculation.get().setPrize(calculationDto.getPrize());
+            calculation.get().setSettlementDate(settlementDate);
+            calculation.get().setPrize(String.valueOf(result));
         }
+        calculationDto.setPrize(String.valueOf(result));
+        return calculationDto;
     }
 }

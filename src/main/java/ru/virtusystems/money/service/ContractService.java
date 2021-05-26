@@ -27,8 +27,8 @@ public class ContractService {
         return contractRepository.findAll();
     }
 
-    public Contract findById(Integer id) {
-        return contractRepository.findById(id).orElse(null);
+    public Contract findByContractNumber(Integer contractNumber) {
+        return contractRepository.findById(contractNumber).orElse(null);
     }
 
     public void saveContract(ContractDto contractDto) {

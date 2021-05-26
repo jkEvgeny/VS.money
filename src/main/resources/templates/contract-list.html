@@ -30,7 +30,7 @@
                 <td th:text="${dto.user}"></td>
                 <td th:text="${dto.calculation.prize}"></td>
                 <td th:text="${dto.contract.dateOfConclusion}"></td>
-                <td><a th:href="@{contract-create/{id}(id=${dto.contract.id})}">Открыть договор</a></td>
+                <td><a th:href="@{contract-create/{contractNumber}(contractNumber=${dto.contract.contractNumber})}">Открыть договор</a></td>
             </tr>
             </tbody>
         </table>

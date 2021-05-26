@@ -5,14 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.virtusystems.money.dto.CalculationDto;
-import ru.virtusystems.money.dto.PolicyholderDto;
 import ru.virtusystems.money.model.Calculation;
-import ru.virtusystems.money.model.Contract;
-import ru.virtusystems.money.model.Policyholder;
 import ru.virtusystems.money.service.CalculationService;
-import ru.virtusystems.money.service.ContractService;
-
-import java.util.List;
 
 @Controller
 public class CalculationController {
@@ -22,16 +16,11 @@ public class CalculationController {
         this.calculationService = calculationService;
     }
 
-//    @GetMapping("/calculation")
-//    public String createCalculationForm(Model model){
-//        model.addAttribute("calculation", new Calculation());
-//        return "calculation";
-//    }
-
     @PostMapping("/calculation")
-    public String createCalculation(CalculationDto calculation){
-        calculationService.saveCalculation(calculation);
-        return "redirect:/contracts";
+    public String createCalculation(Model model, CalculationDto calculationDto){
+        CalculationDto calculationDto1 = calculationService.saveCalculationAndUpdatePrizeAndSettlementDate(calculationDto);
+        model.addAttribute("dto", calculationDto1);
+        return "redirect:/contract-create";
     }
 
     @GetMapping("/calculation")
@@ -40,9 +29,4 @@ public class CalculationController {
         return "calculation";
     }
 
-    /*@PostMapping("/policyholder-update")
-    public String createPolicyholder(PolicyholderDto policyholder) {
-        service.savePolicyholder(policyholder);
-        return "redirect:/policyholders";
-    }*/
 }

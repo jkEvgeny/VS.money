@@ -43,9 +43,10 @@ public class ContractController {
         return "redirect:/contracts";
     }
 
-    @GetMapping("/contract-create/{id}")
-    public String updateConractForm(Model model, @PathVariable Integer id) {
-        model.addAttribute("contract", service.findById(id));
+    @GetMapping("/contract-create/{contractNumber}")
+    public String updateConractForm(Model model, @PathVariable Integer contractNumber) {
+        model.addAttribute("contract", service.findByContractNumber(contractNumber));
+        model.addAttribute("dto", PolicyholderDto.builder().surname("").build());
         return "contract-create";
     }
 

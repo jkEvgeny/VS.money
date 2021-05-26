@@ -19,18 +19,26 @@
     </p>
     <p>
         <label for="propertyType">Тип недвижимости</label>
-        <input type="text" th:field="${dto.calculation.propertyType}" id="propertyType" placeholder="Тип недвижимости">
+        <input type="text" th:field="${dto.calculation.propertyType}" id="propertyType"
+               placeholder="Квартира, дом, комната">
+        <!--<div class="form-group blu-margin">
+            <select class="form-control" th:field="${dto.calculation.propertyType}"  id="propertyType">
+                <option value="0">select operator</option>
+                <option th:each="operator : ${operators}" th:value="${operator.id}" th:text="${operator.operatorName}"></option>
+            </select>
+        </div>-->
     <p>
         <label for="year_of_construction">Год постройки</label>
-        <input type="text" th:field="${dto.calculation.yearOfConstruction}" id="year_of_construction" placeholder="Год постройки">
+        <input type="text" th:field="${dto.calculation.yearOfConstruction}" id="year_of_construction"
+               placeholder="Год постройки">
     </p>
     <p>
         <label for="area">Площадь</label>
         <input type="text" th:field="${dto.calculation.area}" id="area" placeholder="Площадь">
     </p>
     <p>
-    <form action="/policyholders">
-        <input type="button" value="Рассчитать">
+    <form action="#" th:action="@{/calculation}" th:object="${dto}" method="post">
+        <button type="submit">Рассчитать</button>
     </form>
     </p>
     <p>
@@ -53,7 +61,7 @@
         action="#" th:action="@{/policyholders}" th:object="${dto}"
         method="get">
 
-        <button type="submit">Выбрать</button>
+    <button type="submit">Выбрать</button>
 </form>
 <form
         action="#" th:action="@{/policyholders}" th:object="${dto}"
@@ -110,8 +118,8 @@
     </p>
     <p>
     <H2>Комментарий</H2>
-        <label for="comment">Комментарий к договору(не печатается на полисе)</label>
-        <input type="text" th:field="${dto.address.comment}" id="comment" placeholder="">
+    <label for="comment">Комментарий к договору(не печатается на полисе)</label>
+    <input type="text" th:field="${dto.address.comment}" id="comment" placeholder="">
     </p>
     <p>
         <button type="submit">Сохранить</button>
