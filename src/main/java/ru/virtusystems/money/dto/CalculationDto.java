@@ -22,9 +22,9 @@ public class CalculationDto {
 
     private Integer insuranceAmount;
 
-    private LocalDate validityPeriodFrom;
+    private String validityPeriodFrom;
 
-    private LocalDate validityPeriodTo;
+    private String validityPeriodTo;
 
     private String propertyType;
 

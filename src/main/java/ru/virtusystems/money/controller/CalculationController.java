@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.virtusystems.money.dto.CalculationDto;
+import ru.virtusystems.money.dto.PolicyholderDto;
 import ru.virtusystems.money.model.Calculation;
 import ru.virtusystems.money.service.CalculationService;
 
@@ -17,8 +18,8 @@ public class CalculationController {
     }
 
     @PostMapping("/calculation")
-    public String createCalculation(Model model, CalculationDto calculationDto){
-        CalculationDto calculationDto1 = calculationService.saveCalculationAndUpdatePrizeAndSettlementDate(calculationDto);
+    public String createCalculation(Model model, PolicyholderDto dto){
+        CalculationDto calculationDto1 = calculationService.saveCalculationAndUpdatePrizeAndSettlementDate(dto);
         model.addAttribute("dto", calculationDto1);
         return "redirect:/contract-create";
     }

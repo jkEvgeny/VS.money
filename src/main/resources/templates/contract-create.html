@@ -5,11 +5,9 @@
     <title>Оформление договора - Имущество</title>
 </head>
 <body>
-<form
-        action="#" th:action="@{/contract-create}" th:object="${dto}" method="post">
+<form action="#" th:action="@{/calculation}" th:object="${dto}" method="post">
     <p>
         <label for="insuranceAmount">Страховая сумма</label>
-
         <input type="text" th:field="${dto.calculation.insuranceAmount}" id="insuranceAmount"
                placeholder="Страховая сумма">
         <label for="validityPeriodFrom">Срок действия с</label>
@@ -21,12 +19,11 @@
         <label for="propertyType">Тип недвижимости</label>
         <input type="text" th:field="${dto.calculation.propertyType}" id="propertyType"
                placeholder="Квартира, дом, комната">
-        <!--<div class="form-group blu-margin">
-            <select class="form-control" th:field="${dto.calculation.propertyType}"  id="propertyType">
-                <option value="0">select operator</option>
-                <option th:each="operator : ${operators}" th:value="${operator.id}" th:text="${operator.operatorName}"></option>
-            </select>
-        </div>-->
+        <select th:field="${dto.calculation.propertyType}">
+            <option th:each="type : ${allTypes}"
+                    th:value="${type}"
+                    th:text="#{${'seedstarter.type.' + type}}">Wireframe</option>
+        </select>
     <p>
         <label for="year_of_construction">Год постройки</label>
         <input type="text" th:field="${dto.calculation.yearOfConstruction}" id="year_of_construction"
@@ -36,11 +33,7 @@
         <label for="area">Площадь</label>
         <input type="text" th:field="${dto.calculation.area}" id="area" placeholder="Площадь">
     </p>
-    <p>
-    <form action="#" th:action="@{/calculation}" th:object="${dto}" method="post">
-        <button type="submit">Рассчитать</button>
-    </form>
-    </p>
+    <button type="submit">Рассчитать</button>
     <p>
         <label for="settlement_date">Дата расчёта</label>
         <input type="date" th:field="${dto.calculation.settlementDate}" id="settlement_date" placeholder="Дата расчёта">
@@ -51,9 +44,6 @@
     <p>
         <label for="contractNumber">№ договора</label>
         <input type="text" th:field="${dto.contract.contractNumber}" id="contractNumber" placeholder="№ договора">
-
-        <label for="dateOfConclusion">Дата заключения</label>
-        <input type="date" th:field="${dto.contract.dateOfConclusion}" id="dateOfConclusion" placeholder="Премия">
     </p>
 </form>
 <H2>Страхователь</H2>
