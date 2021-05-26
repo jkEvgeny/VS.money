@@ -27,15 +27,9 @@ public class PolicyholderController {
     }
 
     @PostMapping("/policyholders")
-    public String findByName(Model model, PolicyholderDto dto) {
+    public String findByParam(Model model, PolicyholderDto dto) {
         model.addAttribute("dto", PolicyholderDto.builder().name("").build());
-        List<PolicyholderDto> policyholderList = service.findByName(dto.getName());
-        if(policyholderList.size() == 0){
-            policyholderList = service.findBySurname(dto.getSurname());
-            if(policyholderList.size() == 0){
-                policyholderList = service.findByPatronymic(dto.getPatronymic());
-            }
-        }
+        List<PolicyholderDto> policyholderList = service.findByParam(dto);
         model.addAttribute("policyholders", policyholderList);
         return "policyholder-list";
     }

@@ -8,7 +8,7 @@
 <div th:switch="${contracts}">
     <h2 th:case="null">No contracts found!</h2>
     <p>
-    <form action="#" th:action="@{/contract-create}" th:object="${contract}" method="get">
+    <form action="#" th:action="@{/contract-create}" th:object="${dto}" method="get">
         <button type="submit">Создать договор</button>
     </form>
     </p>

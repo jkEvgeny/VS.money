@@ -25,12 +25,15 @@ public class ContractController {
     public String findAll(Model model) {
         List<PolicyholderDto> policyholders= policyholderService.findAll();
         model.addAttribute("contracts", policyholders);
+        model.addAttribute("dto", PolicyholderDto.builder().surname("").build());
         return "contract-list";
     }
 
     @GetMapping("/contract-create")
     public String createContractForm(Model model){
-        model.addAttribute("contract", new Contract());
+        List<PolicyholderDto> policyholders= policyholderService.findAll();
+        model.addAttribute("contracts", policyholders);
+        model.addAttribute("dto", PolicyholderDto.builder().surname("").build());
         return "contract-create";
     }
 

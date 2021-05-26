@@ -10,13 +10,19 @@ CREATE TABLE policyholder
     patronymic      VARCHAR,
     birth_date      DATE                              NOT NULL,
     passport_series INTEGER                           NOT NULL,
-    passport_number INTEGER                           NOT NULL
+    passport_number INTEGER                           NOT NULL,
+    address_id      INTEGER                           NOT NULL,
+    execution_id    INTEGER                           NOT NULL,
+    calculation_id  INTEGER                           NOT NULL,
+    FOREIGN KEY (address_id) REFERENCES address (id) ON DELETE CASCADE,
+    FOREIGN KEY (execution_id) REFERENCES execution (id) ON DELETE CASCADE,
+    FOREIGN KEY (calculation_id) REFERENCES calculation (id) ON DELETE CASCADE
 );
-INSERT INTO policyholder(id, name, surname, patronymic, birth_date, passport_series, passport_number)
-values (100000, 'John', 'Smith', 'Paul', '10.01.1970', 1234, 123456);
+INSERT INTO policyholder(id, name, surname, patronymic, birth_date, passport_series, passport_number, address_id, execution_id, calculation_id)
+values (100000, 'John', 'Smith', 'Paul', '10.01.1970', 1234, 123456, 1, 100000, 100001);
 
-INSERT INTO policyholder(id, name, surname, patronymic, birth_date, passport_series, passport_number)
-values (100001, 'Sarah', 'Dillan', '', '30.12.1990', 4321, 654321);
+INSERT INTO policyholder(id, name, surname, patronymic, birth_date, passport_series, passport_number, address_id, execution_id, calculation_id)
+values (100001, 'Sarah', 'Dillan', '', '30.12.1990', 4321, 654321, 1, 100000, 100001);
 
 CREATE TABLE calculation
 (
@@ -58,5 +64,5 @@ CREATE TABLE address
     comment              VARCHAR
 );
 
-INSERT INTO address (id, state, index)
-values (100000, 000001, '24.05.2021');
+INSERT INTO address (id, state, index, region, district, locality, street, house, housing, structure, flat, comment)
+values (100000, 'Russia', '358000', 'Калмыкия', 1, 'Элиста', '1мкр-он', 45, '', '', 13, '26.05.2021');

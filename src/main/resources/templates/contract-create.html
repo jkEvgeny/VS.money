@@ -6,82 +6,121 @@
 </head>
 <body>
 <form
-        action="#" th:action="@{/contract-create}" th:object="${contracts}" method="post">
-
+        action="#" th:action="@{/contract-create}" th:object="${dto}" method="post">
     <p>
         <label for="insuranceAmount">Страховая сумма</label>
-        <input type="text" th:field="${*.calculation.insuranceAmount}" id="insuranceAmount" placeholder="Страховая сумма">
-       <!-- <label for="validityPeriodFrom">Срок действия с</label>
-        <input type="date" th:field="${*.calculation.validityPeriodFrom}" id="validityPeriodFrom">
+
+        <input type="text" th:field="${dto.calculation.insuranceAmount}" id="insuranceAmount"
+               placeholder="Страховая сумма">
+        <label for="validityPeriodFrom">Срок действия с</label>
+        <input type="date" th:field="${dto.calculation.validityPeriodFrom}" id="validityPeriodFrom">
         <label for="validityPeriodTo">По</label>
-        <input type="date" th:field="${*.calculation.validityPeriodTo}" id="validityPeriodTo">-->
+        <input type="date" th:field="${dto.calculation.validityPeriodTo}" id="validityPeriodTo">
     </p>
-<!--    <p>-->
-        <!--        <label for="propertyType">Тип недвижимости</label>-->
-        <!--        <input type="text" th:field="*{propertyType}" id="propertyType" placeholder="Отчество">-->
-<!--    <div class="dropdown">-->
-<!--        <div class="title">Тип недвижимости</div>-->
-<!--        <ul>-->
-<!--            <li>Квартира</li>-->
-<!--            <li>Дом</li>-->
-<!--            <li>Комната</li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    </p>
+    <p>
+        <label for="propertyType">Тип недвижимости</label>
+        <input type="text" th:field="${dto.calculation.propertyType}" id="propertyType" placeholder="Тип недвижимости">
     <p>
         <label for="year_of_construction">Год постройки</label>
-        <input type="text" th:field="*{year_of_construction}" id="year_of_construction" placeholder="Дата рожения">
+        <input type="text" th:field="${dto.calculation.yearOfConstruction}" id="year_of_construction" placeholder="Год постройки">
     </p>
     <p>
         <label for="area">Площадь</label>
-        <input type="text" th:field="*{area}" id="area" placeholder="Площадь">
+        <input type="text" th:field="${dto.calculation.area}" id="area" placeholder="Площадь">
     </p>
     <p>
     <form action="/policyholders">
         <input type="button" value="Рассчитать">
     </form>
-    </p>-->
-    <!--<p>
-        <label for="settlement_date">Дата расчёта</label>
-        <input type="date" th:field="{calculation.settlement_date}" id="settlement_date" placeholder="Дата расчёта">
-
-        <label for="prize">Премия</label>
-        <input type="text" th:field="*{prize}" id="prize" placeholder="Премия"> // рассчитать по формуле
     </p>
     <p>
-        <label for="contract_number">№ договора</label>
-        <input type="text" th:field="{execution.contract_number}" id="contract_number" placeholder="№ договора">
+        <label for="settlement_date">Дата расчёта</label>
+        <input type="date" th:field="${dto.calculation.settlementDate}" id="settlement_date" placeholder="Дата расчёта">
 
-        <label for="date_of_conclusion">Дата заключения</label>
-        <input type="date" th:field="*{execution.date_of_conclusion}" id="date_of_conclusion" placeholder="Премия"> // рассчитать по формуле
+        <label for="prize">Премия</label>
+        <input type="text" th:field="${dto.calculation.prize}" id="prize" placeholder="Премия">
+    </p>
+    <p>
+        <label for="contractNumber">№ договора</label>
+        <input type="text" th:field="${dto.contract.contractNumber}" id="contractNumber" placeholder="№ договора">
+
+        <label for="dateOfConclusion">Дата заключения</label>
+        <input type="date" th:field="${dto.contract.dateOfConclusion}" id="dateOfConclusion" placeholder="Премия">
     </p>
 </form>
 <H2>Страхователь</H2>
 <form
-        action="#" th:action="@{/policyholder-update/{id}(id=${policyholder.id})}" th:object="${policyholder}" method="post">
-    <form action="/policyholders">
+        action="#" th:action="@{/policyholders}" th:object="${dto}"
+        method="get">
+
         <button type="submit">Выбрать</button>
-    </form>
+</form>
+<form
+        action="#" th:action="@{/policyholders}" th:object="${dto}"
+        method="post">
+
     <p>
         <label for="surname">ФИО</label>
-        <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия">
+        <input type="text" th:field="${dto.surname}" id="surname" placeholder="Фамилия">
         <label for="name"></label>
-        <input type="text" th:field="*{name}" id="name" placeholder="Имя">
+        <input type="text" th:field="${dto.name}" id="name" placeholder="Имя">
         <label for="patronymic"></label>
-        <input type="text" th:field="*{patronymic}" id="patronymic" placeholder="Отчество">
-    <td><a th:href="@{policyholder-update/{id}(id=${policyholder.id})}">Изменить</a></td>
+        <input type="text" th:field="${dto.patronymic}" id="patronymic" placeholder="Отчество">
+    <td><a th:href="@{policyholder-update/{id}(id=${dto.id})}">Изменить</a></td>
     </p>
     <p>
         <label for="birth_date">Дата рождения</label>
-        <input type="date" th:field="*{birth_date}" id="birth_date" placeholder="Дата рожения">
+        <input type="date" th:field="${dto.birth_date}" id="birth_date" placeholder="Дата рожения">
     </p>
     <p>
         <label for="passport_series">Паспорт серия</label>
-        <input type="text" th:field="*{passport_series}" id="passport_series" placeholder="Серия паспорта">
+        <input type="text" th:field="${dto.passport_series}" id="passport_series" placeholder="Серия паспорта">
         <label for="passport_number">№</label>
-        <input type="text" th:field="*{passport_number}" id="passport_number" placeholder="Номер паспорта">
+        <input type="text" th:field="${dto.passport_number}" id="passport_number" placeholder="Номер паспорта">
     </p>
---></form>
+</form>
+<H2>Адрес недвижимости</H2>
+<form
+        action="#" th:action="@{/contracts}" th:object="${dto}"
+        method="post">
 
+    <p>
+        <label for="state"></label>
+        <input type="text" th:field="${dto.address.state}" id="state" placeholder="Государство">
+        <label for="index"></label>
+        <input type="text" th:field="${dto.address.index}" id="index" placeholder="Индекс">
+        <label for="patronymic"></label>
+        <input type="text" th:field="${dto.address.region}" id="region" placeholder="Республика, край, область">
+        <label for="district"></label>
+        <input type="text" th:field="${dto.address.district}" id="district" placeholder="Район">
+    </p>
+    <p>
+        <label for="locality"></label>
+        <input type="text" th:field="${dto.address.locality}" id="locality" placeholder="Населенный пункт">
+        <label for="street"></label>
+        <input type="text" th:field="${dto.address.street}" id="street" placeholder="Улица">
+        <label for="house"></label>
+        <input type="text" th:field="${dto.address.house}" id="house" placeholder="Дом">
+        <label for="housing"></label>
+        <input type="text" th:field="${dto.address.housing}" id="housing" placeholder="Корпус">
+        <label for="structure"></label>
+        <input type="text" th:field="${dto.address.structure}" id="structure" placeholder="Строение">
+        <label for="flat"></label>
+        <input type="text" th:field="${dto.address.flat}" id="flat" placeholder="Квартира">
+    </p>
+    <p>
+    <H2>Комментарий</H2>
+        <label for="comment">Комментарий к договору(не печатается на полисе)</label>
+        <input type="text" th:field="${dto.address.comment}" id="comment" placeholder="">
+    </p>
+    <p>
+        <button type="submit">Сохранить</button>
+    </p>
+</form>
+<form
+        action="#" th:action="@{/contracts}" th:object="${dto}"
+        method="get">
+    <button type="submit">К списку договоров</button>
+</form>
 </body>
 </html>
